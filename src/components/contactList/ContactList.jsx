@@ -2,10 +2,13 @@ import css from './contactlist.module.css';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteContact } from 'components/API/operations';
+import Loader from 'components/loader';
 
 export function ContactList() {
   const contacts = useSelector(state => state.newContact.items);
   const filter = useSelector(state => state.filter);
+  const isLoad = useSelector(state => state.newContact.isLoading);
+
   const dispatch = useDispatch();
 
   const onDeleteContact = deleteItem => {
@@ -14,6 +17,7 @@ export function ContactList() {
 
   return (
     <>
+      {isLoad && <Loader />}
       <ul>
         {contacts
           .filter(item => item.name.toLowerCase().includes(filter))
