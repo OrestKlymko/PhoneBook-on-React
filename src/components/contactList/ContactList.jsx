@@ -1,17 +1,15 @@
 import css from './contactlist.module.css';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { removeContact } from 'redux/contactSlice';
+import { deleteContact } from 'components/API/operations';
 
 export function ContactList() {
-  const contacts = useSelector(state => state.contacts.array);
+  const contacts = useSelector(state => state.newContact.items);
   const filter = useSelector(state => state.filter);
   const dispatch = useDispatch();
 
-
-
   const onDeleteContact = deleteItem => {
-    dispatch(removeContact(deleteItem));
+    dispatch(deleteContact(deleteItem));
   };
 
   return (

@@ -2,11 +2,12 @@ import { Filter } from './filter/Filter';
 import { Form } from './contacts/contacts';
 import { ContactList } from './contactList/ContactList';
 import { useSelector, useDispatch } from 'react-redux';
-import { addContact, removeContact } from '../redux/contactSlice';
+import { useEffect } from 'react';
 import { filterContacts } from '../redux/filterSlice';
+import { deleteContact, fetchContacts, postContact } from './API/operations';
 
 export function App() {
-  const contacts = useSelector(state => state.contacts.array);
+  const contacts = useSelector(state => state.newContact.items);
   const filter = useSelector(state => state.filter);
 
   const dispatch = useDispatch();
@@ -19,13 +20,17 @@ export function App() {
     if (Boolean(contacts.find(contact => contact.name === data.name))) {
       alert(`${data.name} is already in contacts`);
     } else {
-      dispatch(addContact(data));
+      dispatch(postContact(data));
     }
   };
 
   const onDeleteContact = deleteItem => {
-    dispatch(removeContact(deleteItem));
+    dispatch(deleteContact(deleteItem));
   };
+
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
 
   return (
     <div>
