@@ -73,4 +73,3 @@ export const getAllContacts = createSlice({
   },
 });
 
-export const { addContact, removeContact } = getAllContacts.actions;
