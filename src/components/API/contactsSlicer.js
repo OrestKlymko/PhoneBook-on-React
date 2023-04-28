@@ -23,11 +23,37 @@ export const getAllContacts = createSlice({
         items: action.payload,
       };
     },
+    [fetchContacts.rejected](state, action) {
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload,
+      };
+    },
+    [postContact.pending](state) {
+      return {
+        ...state,
+        isLoading: true,
+      };
+    },
     [postContact.fulfilled](state, action) {
       return {
         ...state,
         isLoading: false,
         items: [...state.items, action.payload],
+      };
+    },
+    [postContact.rejected](state, action) {
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload,
+      };
+    },
+    [deleteContact.pending](state) {
+      return {
+        ...state,
+        isLoading: true,
       };
     },
     [deleteContact.fulfilled](state, action) {
@@ -37,7 +63,7 @@ export const getAllContacts = createSlice({
       );
       state.items.splice(index, 1);
     },
-    [fetchContacts.rejected](state, action) {
+    [deleteContact.rejected](state, action) {
       return {
         ...state,
         isLoading: false,
