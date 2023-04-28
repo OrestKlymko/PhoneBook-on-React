@@ -3,7 +3,7 @@ import { deleteContact, fetchContacts } from './operations';
 import { postContact } from './operations';
 
 export const getAllContacts = createSlice({
-  name: 'getContacts',
+  name: 'Contacts',
   initialState: {
     items: [],
     isLoading: false,
@@ -72,4 +72,3 @@ export const getAllContacts = createSlice({
     },
   },
 });
-

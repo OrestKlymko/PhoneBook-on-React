@@ -1,40 +1,22 @@
-import { Filter } from './filter/Filter';
-import { Form } from './contacts/contacts';
-import { ContactList } from './contactList/ContactList';
-import { useSelector, useDispatch } from 'react-redux';
-import { useEffect } from 'react';
-import { filterContacts } from '../redux/filterSlice';
-import { fetchContacts, postContact } from './API/operations';
+import { Route, Routes } from 'react-router-dom';
+import { Header } from './Header/Header';
+import { ContactList } from './ContactList';
+import { ChakraProvider } from '@chakra-ui/react';
+import { LoginPage } from './Login/LoginPage';
+import { RegistrationPage } from './Registration/RegistrationPage';
+import {WelcomePage} from './WelcomePage/WelcomePage'
 
 export function App() {
-  const contacts = useSelector(state => state.newContact.items);
-  const filter = useSelector(state => state.filter);
-
-  const dispatch = useDispatch();
-
-  const onInput = data => {
-    dispatch(filterContacts(data.toLowerCase()));
-  };
-
-  const formSubmit = data => {
-    if (Boolean(contacts.find(contact => contact.name === data.name))) {
-      alert(`${data.name} is already in contacts`);
-    } else {
-      dispatch(postContact(data));
-    }
-  };
-
-  useEffect(() => {
-    dispatch(fetchContacts());
-  }, [dispatch]);
-
   return (
-    <div>
-      <h1>Phonebook</h1>
-      <Form formSubmit={formSubmit} />
-      <h2>Contacts</h2>
-      <Filter onChange={onInput} />
-      <ContactList contacts={contacts} filter={filter} />
-    </div>
+    <ChakraProvider>
+      <Routes>
+        <Route path="/" element={<Header />}>
+        <Route index element={<WelcomePage/>}/>
+          <Route path="contacts" element={<ContactList />} />
+          <Route path="login" element={<LoginPage />} />
+          <Route path="registration" element={<RegistrationPage />} />
+        </Route>
+      </Routes>
+    </ChakraProvider>
   );
 }
