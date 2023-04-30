@@ -2,7 +2,7 @@ import css from '../css/contactlist.module.css';
 import { Filter } from './Filter';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteContact, fetchContacts } from 'redux/operations';
-import Loader from 'components/loader';
+import Loader from 'components/Loader';
 import { useEffect } from 'react';
 import { Form } from './Form';
 import { Button, Container, Box, Heading } from '@chakra-ui/react';
@@ -30,22 +30,10 @@ export function ContactList() {
             .filter(item => item.name.toLowerCase().includes(filter))
             .map(contact => {
               return (
-                <li
-                  key={contact.name}
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-around',
-                    marginBottom: '10px',
-                    border: '2px solid teal',
-                    padding: '10px',
-                    borderRadius: '8px',
-                  }}
-                >
+                <li key={contact.name} className={css.listContact}>
                   <b>{contact.name}</b> {contact.number}
                   <Button
                     colorScheme="red"
-                    className={css.deleteBtn}
                     onClick={() => dispatch(deleteContact(contact.id))}
                   >
                     Delete

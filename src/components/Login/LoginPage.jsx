@@ -2,18 +2,21 @@ import {
   FormControl,
   FormLabel,
   FormErrorMessage,
-  FormHelperText,
   Input,
   Button,
   Container,
   Box,
 } from '@chakra-ui/react';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { loginUser } from '../../redux/Auth/operations';
+
 
 export const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isError, setIsError] = useState(false);
+  const dispatch = useDispatch();
 
   const handleEmailChange = e => setEmail(e.target.value);
   const handlePassChange = e => setPassword(e.target.value);
@@ -26,6 +29,8 @@ export const LoginPage = () => {
       setIsError(true);
       return;
     }
+    dispatch(loginUser({email,password}))
+    setIsError(false);
   };
 
   return (

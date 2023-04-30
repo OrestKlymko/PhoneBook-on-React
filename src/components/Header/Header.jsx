@@ -2,33 +2,20 @@ import { Outlet } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 import { NoLoginHeader } from './NoLoginHeader';
 import { LoginHeader } from './LoginHeader';
+import css from '../../css/header.module.css';
+import { useSelector } from 'react-redux';
 
 export const Header = () => {
-  const isLogin = true;
+  const isLogin = useSelector(state=>state.userCreate.isLogin);
   return (
     <div>
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          padding: '10px',
-          borderBottom: '2px solid gray',
-        }}
-      >
-        <nav style={{ display: 'flex', justifyContent: 'space-between' }}>
+      <div className={css.header}>
+        <nav className={css.nav}>
           <NavLink to="/" style={{ margin: ' auto 30px' }}>
             Remember Contact
           </NavLink>
-          <NavLink to="contacts">List of contact</NavLink>
         </nav>
-        <div
-          style={{
-            width: '200px',
-            display: 'flex',
-            justifyContent: 'space-between',
-            marginRight: '20px',
-          }}
-        >
+        <div className={css.isLogin}>
           {isLogin ? <LoginHeader /> : <NoLoginHeader />}
         </div>
       </div>
