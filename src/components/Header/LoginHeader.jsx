@@ -1,7 +1,7 @@
-import { NavLink } from 'react-router-dom';
+
 import { useDispatch, useSelector } from 'react-redux';
 import {Button} from '@chakra-ui/react';
-import { Logout } from '../../redux/Auth/operations';
+import { logOut } from '../../redux/Auth/operations';
 
 export const LoginHeader = () => {
 
@@ -9,17 +9,13 @@ export const LoginHeader = () => {
 const dispatch = useDispatch();
 
 
-
-
-
   return (
-    <div style={{display:'flex', justifyContent:'space-between', width:'300px', alignItems:'center'}}>
-      <NavLink to="contacts">List of contact</NavLink>
-      <span>Hello, {name}</span>
+    <div style={{display:'flex', justifyContent:'space-between', alignItems:'center'}}>
+      <span style={{marginRight:'20px'}}><b>Hello, {name}</b></span>
       <Button colorScheme="red"
               variant="solid"
               type="submit"
-             onClick={()=>dispatch(Logout())}>Exit</Button>
+             onClick={()=>dispatch(logOut())}>Exit</Button>
     </div>
   );
 };

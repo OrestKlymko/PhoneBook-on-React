@@ -65,7 +65,7 @@ export const RegistrationPage = () => {
             {isError && (
               <FormErrorMessage>Password is required.</FormErrorMessage>
             )}
-            <Button colorScheme="teal" variant="solid" type="submit">
+            <Button colorScheme="teal" variant="solid" type="submit" style={{marginTop:'10px'}}>
               Create account
             </Button>
           </FormControl>

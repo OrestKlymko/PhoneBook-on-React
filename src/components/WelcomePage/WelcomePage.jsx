@@ -1,5 +1,6 @@
 import { Container, Box, Highlight } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
+import css from 'css/welcomePage.module.css'
 
 export const WelcomePage = () => {
   return (
@@ -18,8 +19,8 @@ export const WelcomePage = () => {
           reach out to those who we care about.
         </Highlight>
       </Box>
-      <Link to="login">Log In</Link>
-      <Link to="registration">Registration as new user</Link>
+      <Link to="login" className={css.login}>Log In</Link>
+      <Link to="registration" className={css.registration}>Registration as new user</Link>
     </Container>
   );
 };
