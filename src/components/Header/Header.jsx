@@ -4,7 +4,7 @@ import { NoLoginHeader } from './NoLoginHeader';
 import { LoginHeader } from './LoginHeader';
 import css from '../../css/header.module.css';
 import { useSelector } from 'react-redux';
-import Loader from '../Loader';
+import Loader from '../Contact/Loader';
 
 export const Header = () => {
   const isLogin = useSelector(state=>state.userCreate.isLogin);

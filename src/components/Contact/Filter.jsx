@@ -1,6 +1,6 @@
 import { nanoid } from 'nanoid';
 import { useDispatch } from 'react-redux';
-import { filterContacts } from 'redux/filterSlice';
+import { filterContacts } from 'redux/Contact/filterSlice';
 import { Input } from '@chakra-ui/react';
 
 export function Filter() {

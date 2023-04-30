@@ -1,8 +1,8 @@
 import { nanoid } from 'nanoid';
 import React, { useState } from 'react';
-import css from '../css/form.module.css';
+import css from '../../css/form.module.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { postContact } from 'redux/operations';
+import { postContact } from 'redux/Contact/operations';
 import { Input, Button, Heading, Highlight, useToast } from '@chakra-ui/react';
 
 export function Form() {

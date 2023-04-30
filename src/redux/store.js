@@ -1,10 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { filterSlice } from './filterSlice';
-import { getAllContacts } from 'redux/contactsSlicer';
+import { filterSlice } from './Contact/filterSlice';
+import { getAllContacts } from 'redux/Contact/contactsSlicer';
 import { createUserSlicer } from './Auth/userSlicer';
 import { persistReducer, persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage'; // defaults to localStorage for web
-
 
 import {
   FLUSH,
@@ -18,18 +17,14 @@ import {
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist:['token']
+  whitelist: ['token', 'isLogin'],
 };
-
-
-
 
 export const store = configureStore({
   reducer: {
     filter: filterSlice.reducer,
     newContact: getAllContacts.reducer,
     userCreate: persistReducer(persistConfig, createUserSlicer.reducer),
-
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
@@ -39,8 +34,4 @@ export const store = configureStore({
     }),
 });
 
-export const persistor = persistStore(store)
-
-
-
-
+export const persistor = persistStore(store);

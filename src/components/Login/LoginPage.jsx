@@ -7,16 +7,18 @@ import {
   Container,
   Box,
 } from '@chakra-ui/react';
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { loginUser } from '../../redux/Auth/operations';
-
+import { useNavigate } from 'react-router-dom';
 
 export const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isError, setIsError] = useState(false);
   const dispatch = useDispatch();
+  const isLogin = useSelector(state => state.userCreate.isLogin);
+  const navigation = useNavigate();
 
   const handleEmailChange = e => setEmail(e.target.value);
   const handlePassChange = e => setPassword(e.target.value);
@@ -29,10 +31,17 @@ export const LoginPage = () => {
       setIsError(true);
       return;
     }
-    dispatch(loginUser({email,password}))
+
+    dispatch(loginUser({ email, password }));
+
     setIsError(false);
   };
-
+  useEffect(() => {
+    if (isLogin) {
+      navigation('/contacts');
+    }
+    // eslint-disable-next-line
+  }, [isLogin]);
   return (
     <Container maxW="1050px" centerContent>
       <Box padding="10" color="black" w="600px">
@@ -62,7 +71,7 @@ export const LoginPage = () => {
               type="submit"
               marginTop="20px"
             >
-              Let's do it!
+              Log in
             </Button>
           </FormControl>
         </form>

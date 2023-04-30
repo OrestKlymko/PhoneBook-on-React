@@ -1,8 +1,8 @@
-import css from '../css/contactlist.module.css';
+import css from '../../css/contactlist.module.css';
 import { Filter } from './Filter';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteContact, fetchContacts } from 'redux/operations';
-import Loader from 'components/Loader';
+import { deleteContact, fetchContacts } from 'redux/Contact/operations';
+import Loader from 'components/Contact/Loader';
 import { useEffect } from 'react';
 import { Form } from './Form';
 import { Button, Container, Box, Heading } from '@chakra-ui/react';

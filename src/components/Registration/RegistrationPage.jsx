@@ -6,10 +6,12 @@ import {
   Button,
   Container,
   Box,
+  useToast,
 } from '@chakra-ui/react';
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { createUser } from '../../redux/Auth/operations';
+import { useNavigate } from 'react-router-dom';
 
 export const RegistrationPage = () => {
   const [email, setEmail] = useState('');
@@ -17,11 +19,14 @@ export const RegistrationPage = () => {
   const [name, setName] = useState('');
   const [isError, setIsError] = useState(false);
   const dispatch = useDispatch();
+  const toast = useToast();
+  const isNew = useSelector(state => state.userCreate.newUser);
+  const navigation = useNavigate();
 
   const handleEmailChange = e => setEmail(e.target.value);
   const handlePassChange = e => setPassword(e.target.value);
   const handleNameChange = e => setName(e.target.value);
-  const onSubmitForm = e => {
+  const onSubmitForm = async e => {
     e.preventDefault();
     const email = e.currentTarget.elements.email.value;
     const password = e.currentTarget.elements.password.value;
@@ -30,9 +35,21 @@ export const RegistrationPage = () => {
       setIsError(true);
       return;
     }
-    dispatch(createUser({email,password,name}))
+    await dispatch(createUser({ email, password, name }));
     setIsError(false);
   };
+  useEffect(() => {
+    if (isNew) {
+      toast({
+        title: 'You are created account',
+        status: 'success',
+        duration: 9000,
+        isClosable: true,
+      });
+      navigation('/contacts');
+    }
+    // eslint-disable-next-line
+  }, [isNew]);
 
   return (
     <Container maxW="1050px" centerContent>
@@ -65,7 +82,12 @@ export const RegistrationPage = () => {
             {isError && (
               <FormErrorMessage>Password is required.</FormErrorMessage>
             )}
-            <Button colorScheme="teal" variant="solid" type="submit" style={{marginTop:'10px'}}>
+            <Button
+              colorScheme="teal"
+              variant="solid"
+              type="submit"
+              style={{ marginTop: '10px' }}
+            >
               Create account
             </Button>
           </FormControl>
