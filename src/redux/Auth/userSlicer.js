@@ -43,7 +43,7 @@ export const createUserSlicer = createSlice({
       return {
         ...state,
         isLogin: true,
-        name: payload.name??'',
+        name: payload.name,
         isLoad: false,
       };
     },
