@@ -13,7 +13,7 @@ export function App() {
   const dispatch = useDispatch();
   const isLogin = useSelector(state => state.userCreate.isLogin);
   useEffect(() => {
-    dispatch(getCurrentUser());
+    dispatch(getCurrentUser);
   }, [dispatch]);
 
   return (
